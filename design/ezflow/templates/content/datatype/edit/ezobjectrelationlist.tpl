@@ -94,10 +94,9 @@
     {/if}
 {/if}
 
-{* BFC wrap 'Create Object' short div in !=0 and !=5 *}
+{* BFC wrap 'Create Object' short div in !=0 and !=5 // if type = 0 or 2 allow, else NO *}
 {if array(0,5)|contains($class_content.selection_type)|not()}
-    Create object 
-    {section show = and( is_set( $class_content.default_placement.node_id ), ne( 0, $class_content.default_placement.node_id ), ne( '', $class_content.object_class ) )}
+    {section show = and( is_set( $class_content.default_placement.node_id ), ne( 0, $class_content.default_placement.node_id ), ne( '', $class_content.object_class ), ne($class_content.type,2) )}
         {def $defaultNode = fetch( content, node, hash( node_id, $class_content.default_placement.node_id ))}
         {if and( is_set( $defaultNode ), $defaultNode.can_create )}
             <div id='create_new_object_{$attribute.id}' style="display:none;">
